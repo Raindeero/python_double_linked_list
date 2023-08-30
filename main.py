@@ -71,6 +71,31 @@ class Dlist:
             temp.next.prev = None
             temp.next = None
 
+    def del_item_by_data(self, after):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next is None:
+            self.head = None
+        elif self.head.data == after:
+            to_delete = self.head.next
+            self.head.next = to_delete.next
+            to_delete.next.prev = self.head
+            to_delete.next = None
+            to_delete.prev = None
+            to_delete = None
+        else:
+            temp = self.head
+            while temp is not None and temp.data != after:
+                temp = temp.next
+            to_delete = temp.next
+            temp.next = to_delete.next
+            if to_delete.next is not None:
+                to_delete.next.prev = temp
+            to_delete.next = None
+            to_delete.prev = None
+            to_delete = None
+
     def del_list(self):
         if self.head is None:
             print("List is empty")
